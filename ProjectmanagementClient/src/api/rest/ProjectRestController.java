@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -39,7 +40,6 @@ public class ProjectRestController extends Application  {
 	public Response creatProjects(ProjectModel pm) {
 		
 		if(pm.getId()!=0) {
-			ProjectModel pmUpdated =new ProjectModel();
 			List<ProjectModel> pmList= new ArrayList<ProjectModel>();
 			FileOutputStream fos;
 			try {
@@ -155,6 +155,48 @@ public class ProjectRestController extends Application  {
 		return Response
 				.status(200)
 				.entity(pm)
+				.build();
+	}
+	
+	
+	@DELETE
+	@Path("/delete/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteProjects( @Context UriInfo uriInfo) {
+
+		List<ProjectModel> pmList= new ArrayList<ProjectModel>();
+		FileOutputStream fos;
+
+		MultivaluedMap<String, String> queryParams = uriInfo.getPathParameters(); 
+		int id = Integer.parseInt(queryParams.getFirst("id"));
+		try {
+			File file =new File ("C:\\\\Projects\\Project.json");
+			if(file.exists()&&file.length()>0) {
+				FileInputStream fis = new FileInputStream("C:\\\\Projects\\Project.json");
+				ObjectInputStream ois;
+				ois = new ObjectInputStream(fis);
+				pmList = (List<ProjectModel>) ois.readObject();
+				ois.close();
+			}
+			for(int i=0; i<pmList.size(); i++){
+				if(pmList.get(i).getId()==id) {
+					pmList.remove(i);
+					fos = new FileOutputStream("C:\\\\Projects\\Project.json");
+					ObjectOutputStream oos = new ObjectOutputStream(fos);
+					oos.writeObject(pmList);
+					oos.close();
+					break;
+				}
+			}
+		}
+
+		catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return Response
+				.status(200)
+				.entity(id)
 				.build();
 	}
 }

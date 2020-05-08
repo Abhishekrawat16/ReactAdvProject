@@ -1,12 +1,15 @@
 package api.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import api.model.ProjectTaskModel;
 
 @XmlRootElement
 public class ProjectModel implements Serializable {
@@ -15,6 +18,8 @@ public class ProjectModel implements Serializable {
 	private String projectIdentifier;
 	private String projectName;
 	private String description;
+	private int taskSequence;
+	private List<ProjectTaskModel> ptmList=new ArrayList<ProjectTaskModel>();
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date start_date;
@@ -57,6 +62,17 @@ public class ProjectModel implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public int getTaskSequence() {
+		return taskSequence;
+	}
+	public void setTaskSequence(int taskSequence) {
+		this.taskSequence = taskSequence;
+	}
+	public List<ProjectTaskModel> getPtmList() {
+		return ptmList;
+	}
+	public void setPtmList(List<ProjectTaskModel> ptmList) {
+		this.ptmList = ptmList;
+	}
 	
 }
