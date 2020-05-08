@@ -24,7 +24,7 @@ class App extends React.Component {
     </div>
    <Route path ="/dashboard" component={Dashboard}/>
    <Route path ="/addproject" component={Addproject}/>
-   <Route path ="/addprojecttask" component={AddProjectTask}/>
+   <Route path ="/addprojecttask/:id" component={AddProjectTask}/>
    <Route path ="/updateproject/:id" component={updateProject}/>
    <Route path ="/projecttask/:id" component={ProjectTask}/>
   </Router>

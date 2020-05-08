@@ -9,13 +9,14 @@ class ProjectTask extends React.Component {
     // }
     render() {
         const { projects } = this.props.projects;
+        const { id }=this.props.match.params;
         return (
             <div className="projects">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <br />
-                            <CreateProjectTaskButton />
+                            <CreateProjectTaskButton id={id}/>
                             <br />
                             <hr />
                             {/* {projects.map(project => (
