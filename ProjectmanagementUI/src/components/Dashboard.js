@@ -39,11 +39,6 @@ Dashboard.propTypes = {
 const mapStateToProps = state => (
     {
         projects: state.projects
-        // projects:[{id:1,
-        //     projectIdentifier:"projectIdentifier",
-        //     projectName:"projectName",
-        //     description:"desc"
-        // }]
     });
 
 

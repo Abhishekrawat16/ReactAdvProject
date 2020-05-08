@@ -5,7 +5,7 @@ import Add from '../../../Add.png';
 const CreateProjectTaskButton = (props) => {
     return (
         <React.Fragment>
-            <Link to={`/addprojecttask/${props.id}`} className="btn btn-lg btn-info">
+            <Link to={`/addprojecttask/${props.id}`} className=" cptb btn btn-lg btn-info">
                 {/* <img src={Add} ></img> */}
                 Create Project Task
             </Link>

@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getProjects } from "../../../action/ProjectActions";
 import CreateProjectTaskButton from './CreateProjectTaskButton.js';
+import TaskColoumn from './TaskColoumn';
+import PendingTask from './PendingTasks';
+import DoneTask from './DoneTasks';
 class ProjectTask extends React.Component {
-    // componentDidMount() {
-    //     this.props.getProjects();
-    // }
+   
     render() {
         const { projects } = this.props.projects;
         const { id }=this.props.match.params;
@@ -19,6 +20,11 @@ class ProjectTask extends React.Component {
                             <CreateProjectTaskButton id={id}/>
                             <br />
                             <hr />
+                            <div>
+                            <TaskColoumn Status="TO DO" className="taskstatus todo"/>
+                            <TaskColoumn Status="In Progress" className="taskstatus inprogress"/>
+                            <TaskColoumn Status="Done" className="taskstatus done"/>
+                            </div>
                             {/* {projects.map(project => (
                                 <ProjectItem key={project.id} project={project} />
                             ))} */}
