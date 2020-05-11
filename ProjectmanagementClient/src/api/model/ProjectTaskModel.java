@@ -15,7 +15,7 @@ public class ProjectTaskModel implements Serializable{
     private String summary;
     private String acceptanceCriteria;
     private String status;
-    private int priority;
+    private String priority;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dueDate;
     private String backlog;
@@ -55,10 +55,10 @@ public class ProjectTaskModel implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getPriority() {
+	public String getPriority() {
 		return priority;
 	}
-	public void setPriority(int priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 	public Date getDueDate() {
