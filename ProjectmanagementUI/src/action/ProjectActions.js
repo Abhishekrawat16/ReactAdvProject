@@ -16,6 +16,10 @@ export const createProject = (project, history) => async dispatch => {
 export const createProjectTask = (projectTask, history) => async dispatch => {
     try {
         const res = await axios.post("http://localhost:8080/ProjectmanagementClient/api/projecttask", projectTask);
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
         history.push("/projecttask/" + projectTask.id);
     } catch (error) {
         dispatch({
