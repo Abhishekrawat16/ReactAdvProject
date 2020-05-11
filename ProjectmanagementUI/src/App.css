@@ -104,14 +104,28 @@ img {
 .cptb{
   background-color:#007bff !important;
 }
-.high{
+.HIGH{
   background-color: rgba(148, 20, 20, 0.979);
   width: 100%;
   padding: 15px;
 }
+
+.MEDIUM{
+  background-color: darkgoldenrod;
+  width: 100%;
+  padding: 15px;
+}
+.LOW{
+  background-color: #17a2b8;
+  width: 100%;
+  padding: 15px;
+}
+
 .summary{
   color: black;
   height: 50px;
+  font-weight: bold;
+  font-size: x-large;
 }
 
 .view{
@@ -127,4 +141,13 @@ img {
   margin-top: 10px;
   border-radius: 5px!important;
   background-color:lightgrey;
+}
+.error{
+  color: red;
+}
+
+.img{
+  width: 20px;
+  height: 20px;
+  color: white ;
 }

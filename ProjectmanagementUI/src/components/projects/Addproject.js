@@ -9,10 +9,10 @@ class Addproject extends React.Component
     super(props);
     this.state={
         projectName: "",
-        projectIdentifier: " ",
-        description: " ",
-        start_date: " ",
-        end_date: " ",
+        projectIdentifier: "",
+        description: "",
+        start_date: "",
+        end_date: "",
         errors:{ }
        };
         this.onChange=this.onChange.bind(this);
@@ -60,7 +60,7 @@ class Addproject extends React.Component
                     name="projectName"
                     value={this.state.projectName}
                     onChange={this.onChange} />
-                  <p>{this.state.errors.projectName}</p>
+                  <p className="error">{this.state.errors.projectName}</p>
                   </div>
                 <div className="form-group">
                   <input
@@ -70,7 +70,7 @@ class Addproject extends React.Component
                     name="projectIdentifier"
                     value={this.state.projectIdentifier}
                     onChange={this.onChange}/>
-                    <p>{this.state.errors.projectIdentifier}</p>
+                    <p className="error">{this.state.errors.projectIdentifier}</p>
                 </div>
 
                 <div className="form-group">
@@ -80,7 +80,7 @@ class Addproject extends React.Component
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}/>
-                    <p>{this.state.errors.description}</p>
+                    <p className="error">{this.state.errors.description}</p>
                   </div>
                 
                 <h6>Start Date</h6>

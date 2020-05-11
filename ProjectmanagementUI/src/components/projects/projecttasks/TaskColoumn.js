@@ -1,34 +1,23 @@
 import React from 'react';
 import { Component } from "react";
 import ShowTasks from './ShowTasks';
-import { getProjectTasks } from "../../../action/ProjectActions";
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class TaskColoumn extends Component{
-
-
- componentDidMount() {
-        this.props.getProjectTasks();
-    }
-
-    render(){
-        return(
+class TaskColoumn extends Component {
+    render() {
+        const  tasks  = this.props.tasks;
+        const Status  = this.props.Status;
+        return (
             <div className="inlineStatus ">
-              <div className={this.props.className}>{this.props.Status}</div>
-                <ShowTasks/>
+                <div className={this.props.className}>{Status}</div>
+                
+                {tasks.map(task => (
+                    <ShowTasks key={task.projectSequence} task={task} />
+                ))}
+
             </div>
-        )
+        );
     }
 }
 
-TaskColoumn.propTypes = {
-    projectTasks: PropTypes.object.isRequired,
-    getProjectTasks: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => (
-    {
-        projectTasks: state.projectTasks
-    });
-export default connect(mapStateToProps, { getProjectTasks })(TaskColoumn);
+export default TaskColoumn;

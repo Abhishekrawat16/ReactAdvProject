@@ -1,5 +1,6 @@
 import React from 'react';
 import { createProjectTask } from "../../../action/ProjectActions";
+import { getProjectTask } from "../../../action/ProjectActions";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -7,8 +8,7 @@ class AddProjectTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id:Number,
-      // projectSequence: "",
+      id: Number,
       summary: "",
       acceptanceCriteria: "",
       status: "",
@@ -16,22 +16,52 @@ class AddProjectTask extends React.Component {
       dueDate: "",
       backlog: "",
       projectIdentifier: "",
-      // created_At: "",
-      // updated_At: ""
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount(){
-        const { id }=this.props.match.params;
-        this.setState({id});
+  componentDidMount() {
+    const { seq } = this.props.match.params;
+    const { id } = this.props.match.params;
+    if (seq != "new") {
+      this.props.getProjectTask(id,seq);
     }
+    else {
+      this.setState({ id });
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+    else {
+      const {
+        id,
+        summary,
+        acceptanceCriteria,
+        projectSequence,
+        status,
+        priority,
+        dueDate,
+        backlog,
+        created_At,
+        updated_At
+      } = nextProps.projectTask;
+      this.setState({
+        id,
+        summary,
+        acceptanceCriteria,
+        projectSequence,
+        status,
+        priority,
+        dueDate,
+        backlog,
+        created_At,
+        updated_At
+      });
     }
   }
 
@@ -40,11 +70,13 @@ class AddProjectTask extends React.Component {
     const newProjectTask = {
       id: this.state.id,
       summary: this.state.summary,
-      // projectIdentifier: this.state.projectIdentifier,
+      projectSequence:this.state.projectSequence,
       acceptanceCriteria: this.state.acceptanceCriteria,
       dueDate: this.state.dueDate,
-      priority:parseInt(this.state.priority),
-      status: this.state.status
+      priority: this.state.priority,
+      status: this.state.status,
+      created_At:this.state.created_At,
+      updated_At:this.state.updated_At
     };
     //console.log(newProject);
     //make a call for createProject(newProject,this.props.history)
@@ -55,7 +87,6 @@ class AddProjectTask extends React.Component {
   }
 
   render() {
-    //const { errors } = this.state;
     return (
       <div className="project">
         <div className="container">
@@ -74,7 +105,7 @@ class AddProjectTask extends React.Component {
                     name="summary"
                     value={this.state.summary}
                     onChange={this.onChange} />
-                  <p>{this.state.errors.summary}</p>
+                  <p className="error">{this.state.errors.summary}</p>
                 </div>
                 <div className="form-group">
                   <input
@@ -84,7 +115,7 @@ class AddProjectTask extends React.Component {
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
                     onChange={this.onChange} />
-                  <p>{this.state.errors.acceptanceCriteria}</p>
+                  <p className="error">{this.state.errors.acceptanceCriteria}</p>
                 </div>
 
                 <h6>Due Date</h6>
@@ -104,10 +135,11 @@ class AddProjectTask extends React.Component {
                     placeholder="Select Priority"
                     onChange={this.onChange}>
                     <option value="" disabled hidden>Select Priority</option>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
+                    <option value="HIGH">High</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="LOW">Low</option>
                   </select>
+                  <p className="error">{this.state.errors.priority}</p>
                 </div>
 
                 <div className="form-group">
@@ -134,13 +166,14 @@ class AddProjectTask extends React.Component {
     );
   }
 }
+AddProjectTask.propTypes = {
+  getProjectTask: PropTypes.func.isRequired,
+  createProjectTask:PropTypes.func.isRequired,
+  projectTask: PropTypes.object.isRequired,
+};
 
-// Addproject.propTypes = {
-//   createProject: PropTypes.func.isRequired,
-//   errors: PropTypes.object.isRequired
-// };
 const mapStateToProps = state => ({
-  errors: state.errors
+  projectTask:state.projectTasks.projectTask
 });
 
-export default connect(mapStateToProps, { createProjectTask })(AddProjectTask);
+export default connect(mapStateToProps, { createProjectTask , getProjectTask})(AddProjectTask);
