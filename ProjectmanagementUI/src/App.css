@@ -103,6 +103,7 @@ img {
 
 .cptb{
   background-color:#007bff !important;
+  display: inline !important;
 }
 .HIGH{
   background-color: rgba(148, 20, 20, 0.979);
@@ -146,8 +147,6 @@ img {
   color: red;
 }
 
-.img{
-  width: 20px;
-  height: 20px;
-  color: white ;
+.addImg{
+  width: 3%;
 }

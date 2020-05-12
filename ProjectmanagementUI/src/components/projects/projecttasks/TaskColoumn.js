@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 
 class TaskColoumn extends Component {
     render() {
-        const  tasks  = this.props.tasks;
+        const  Tasks  = this.props.tasks;
         const Status  = this.props.Status;
         return (
             <div className="inlineStatus ">
                 <div className={this.props.className}>{Status}</div>
                 
-                {tasks.map(task => (
+                {Tasks.map(task => (
                     <ShowTasks key={task.projectSequence} task={task} />
                 ))}
 
@@ -20,4 +20,8 @@ class TaskColoumn extends Component {
     }
 }
 
+TaskColoumn.propTypes = {
+    Tasks: PropTypes.object.isRequired,
+    Status : PropTypes.object.isRequired
+  };
 export default TaskColoumn;
